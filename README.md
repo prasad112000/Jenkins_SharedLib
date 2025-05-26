@@ -1,27 +1,77 @@
-# Jenkins Shared Library
-- Shared libraries in Jenkins Pipelines are reusable pieces of code that can be organized into functions and classes.
-- These libraries allow you to encapsulate common logic, making it easier to maintain and share across multiple pipelines and projects.
-- Shared library must be inside the **vars** directory in your github repository
-- Shared library uses **groovy** syntax and file name ends with **.groovy** extension. 
 
-#
-## How to create and use shared library in Jenkins.
+# Jenkins Shared Library – Prasad Pardeshi
 
-### How to create Shared library
-- Login to your Jenkins dashboard. <a href="">Jenkins Installation</a>
-- Go to **Manage Jenkins** --> **System** and search for **Global Trusted Pipeline Libraries**.
-<img src="https://github.com/DevMadhup/Jenkins_SharedLib/blob/main/assests/Sharedlib-config-1.png" />
+Shared libraries in Jenkins Pipelines are **reusable code modules** that help you maintain cleaner, modular, and DRY (Don't Repeat Yourself) pipelines. This repository demonstrates how to structure and use a shared library in Jenkins.
 
-  **Name:** Shared <br>
-  **Default version:** \<branch name><br>
-  **Project repository:** https://github.com/DevMadhup/Jenkins_SharedLib.git <br>
-****
-<img src="https://github.com/DevMadhup/Jenkins_SharedLib/blob/main/assests/Sharedlib-config-2.png" />
+---
 
-#
-### How to use it in Jenkins pipeline
-- Go to your declarative pipeline
-- Add **@Library('Shared') _** at the very first line of your jenkins pipeline.
-<img src="https://github.com/DevMadhup/Jenkins_SharedLib/blob/main/assests/shared-lib-in-pipeline.png" />
+## 📦 Project Structure
 
-**Note:** @Library() _ is the syntax to use shared library.
+```
+Jenkins_SharedLib/
+├── vars/
+│   └── <yourGroovyScript>.groovy  # Groovy script with pipeline logic
+├── resources/
+│   └── <optional-support-files>
+```
+
+> ✅ Shared library logic must be placed in the **`vars/`** directory.  
+> ✅ Each file should use **Groovy syntax** and end with a **`.groovy`** extension.
+
+---
+
+## 🛠 How to Configure Shared Library in Jenkins
+
+1. Login to your Jenkins dashboard.  
+   If Jenkins is not installed, [https://www.jenkins.io/doc/book/installing/]
+
+2. Navigate to:
+   ```
+   Manage Jenkins → Configure System → Global Pipeline Libraries
+   ```
+
+3. Add a new library configuration:
+   - **Name**: `Shared`
+   - **Default version**: `main`
+   - **Project Repository**:  
+     `https://github.com/prasad112000/Jenkins_SharedLib.git`
+   - Check **"Load implicitly"** (optional)
+
+## 🚀 How to Use This Shared Library in a Jenkins Pipeline
+
+In your Jenkinsfile, add the following at the top:
+
+```groovy
+@Library('Shared') _
+```
+
+Now, you can directly use any function from your shared library, like:
+
+```groovy
+helloWorld()  // If defined in vars/helloWorld.groovy
+```
+
+Example:
+
+```groovy
+@Library('Shared') _
+pipeline {
+    agent any
+    stages {
+        stage('Example') {
+            steps {
+                script {
+                    helloWorld()
+                }
+            }
+        }
+    }
+}
+
+🙌 Author
+
+**Prasad Vinod Pardeshi**  
+📧 pardeshiprasad42@gmail.com  
+🔗 [LinkedIn](https://www.linkedin.com/in/prasad-pardeshi11/)  
+💻 [GitHub](https://github.com/prasad112000)
+
