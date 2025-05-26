@@ -5,7 +5,7 @@ Shared libraries in Jenkins Pipelines are **reusable code modules** that help yo
 
 ---
 
-## 📦 Project Structure
+## 📦Structure
 
 ```
 Jenkins_SharedLib/
